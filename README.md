@@ -21,3 +21,23 @@ A commonly agreed-upon theory amongst many League of Legends players is that the
 **Question: Does the Blue Side have a significant advantage over Red Side in League of Legends?**
 
 After attempting to answer this question, important insights can be gained into the accuracy of this theory. This may serve to benefit players' decision-making processes in matches, elevate the e-sports entertainment experience, and enhance the overall gameplay experience.
+
+### Relevant Columns
+
+To address our question, we narrowed down the dataset to only include these relevant columns:
+
+- gameid: This string column represents a unique identifier for each individual match in the dataset. This is useful when trying to distinguish between different matches.
+- side: This string column represents the affilitation of the player or team. The only two values in this column are "Red" and "Blue", representing the Red Side and Blue Side respectively.
+- result: This Boolean column represents whether the player or team won or lost the corresponding match. A "1" represents a win, and a "0" represents a loss.
+- kills: This integer column represents the number of enemy champions a player or team eliminated during the respective match.
+- deaths: This integer column represents the number of times the player or team was eliminated by enemy champions during the respective match.
+- assists: This integer column represents the number of times a player or team was credited with assisting with a kill. In other words, the player or team didn't make the kill themselves, but was credited for helping another player or team eliminate an enemy champion.
+- firstdragon: This Boolean column represents whether a player or team gets the first dragon or assists with getting the first dragon. A "1" means they got the first dragon or assisted with getting the first dragon, while a "0" means they didn't get the first dragon or didn't assist with getting the first dragon.
+- dragons: This float column represents the number of dragons the player or team attained during the match.
+- firstherald: This Boolean column represents whether a player or team gets the first herald or assists with getting the first herald. A "1" means they got the first herald or assisted with getting the first herald, while a "0" means they didn't get the first herald or didn't assist with getting the first herald.
+- heralds: This float column represents the number of heralds the player or team attained during the match.
+- firstbaron: This Boolean column represents whether a player or team gets the first baron or assists with getting the first baron. A "1" means they got the first baron or assisted with getting the first baron, while a "0" means they didn't get the first baron or didn't assist with getting the first baron.
+- barons: This float column represents the number of barons the player or team attained during the match.
+- position: This string column represents the position of the particular player the row corresponds to. The possible positions include "top", "jungle", "mid", "bot", and "support". If the row corresponds to a team, the position column simply contains the word "Team".
+- gamelength: This integer column represents the length of the match, in seconds.
+- league: This string column represents the specific league tournament in which the corresponding match took place.
