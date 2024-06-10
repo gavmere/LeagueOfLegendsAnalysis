@@ -52,10 +52,10 @@ Second, we decided to only keep the "team" rows of the dataset. Our question abo
 
 After performing the two steps above, here's what our dataset looked like:
 
-|    | gameid                | side   |   result |   kills |   deaths |   assists |   firstdragon |   dragons |   firstherald |   heralds |   firstbaron |   barons | position   |   gamelength | league   |
-|---:|:----------------------|:-------|---------:|--------:|---------:|----------:|--------------:|----------:|--------------:|----------:|-------------:|---------:|:-----------|-------------:|:---------|
-| 10 | ESPORTSTMNT01_2690210 | Blue   |        0 |       9 |       19 |        19 |             0 |         1 |             1 |         2 |            0 |        0 | team       |         1713 | LCKC     |
-| 11 | ESPORTSTMNT01_2690210 | Red    |        1 |      19 |        9 |        62 |             1 |         3 |             0 |         0 |            0 |        0 | team       |         1713 | LCKC     |
-| 22 | ESPORTSTMNT01_2690219 | Blue   |        0 |       3 |       16 |         7 |             0 |         1 |             1 |         1 |            0 |        0 | team       |         2114 | LCKC     |
-| 23 | ESPORTSTMNT01_2690219 | Red    |        1 |      16 |        3 |        39 |             1 |         4 |             0 |         1 |            1 |        2 | team       |         2114 | LCKC     |
-| 34 | 8401-8401_game_1      | Blue   |        1 |      13 |        6 |        35 |           nan |         2 |           nan |       nan |          nan |        1 | team       |         1365 | LPL      |
+| gameid                | side   |   result |   kills |   deaths |   assists |   firstdragon |   dragons |   firstherald |   heralds |   firstbaron |   barons | position   |   gamelength | league   |
+|:----------------------|:-------|---------:|--------:|---------:|----------:|--------------:|----------:|--------------:|----------:|-------------:|---------:|:-----------|-------------:|:---------|
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       9 |       19 |        19 |             0 |         1 |             1 |         2 |            0 |        0 | team       |         1713 | LCKC     |
+| ESPORTSTMNT01_2690210 | Red    |        1 |      19 |        9 |        62 |             1 |         3 |             0 |         0 |            0 |        0 | team       |         1713 | LCKC     |
+| ESPORTSTMNT01_2690219 | Blue   |        0 |       3 |       16 |         7 |             0 |         1 |             1 |         1 |            0 |        0 | team       |         2114 | LCKC     |
+| ESPORTSTMNT01_2690219 | Red    |        1 |      16 |        3 |        39 |             1 |         4 |             0 |         1 |            1 |        2 | team       |         2114 | LCKC     |
+| 8401-8401_game_1      | Blue   |        1 |      13 |        6 |        35 |           nan |         2 |           nan |       nan |          nan |        1 | team       |         1365 | LPL      |
