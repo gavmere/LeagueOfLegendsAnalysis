@@ -41,3 +41,15 @@ To address our question, we narrowed down the dataset to only include these rele
 - position: This string column represents the position of the particular player the row corresponds to. The possible positions include "top", "jungle", "mid", "bot", and "support". If the row corresponds to a team, the position column simply contains the word "Team".
 - gamelength: This integer column represents the length of the match, in seconds.
 - league: This string column represents the specific league tournament in which the corresponding match took place.
+
+## Data Cleaning and Exploratory Data Analysis
+
+### Data Cleaning
+
+The first step of our data cleaning process involved removing the irrelevant columns. Out of the 131 columns in the original dataset, we only kept 15 of the columns, which are described in more detail above.
+
+Second, we decided to only keep the "team" rows of the dataset. Our question above only concerns comparisons between the two teams, so the player rows would be irrelevant.
+
+After performing the two steps above, here's what our dataset looked like:
+
+|    | gameid                | side   |   result |   kills |   deaths |   assists |   firstdragon |   dragons |   firstherald |   heralds |   firstbaron |   barons | position   |   gamelength | league   |\n|---:|:----------------------|:-------|---------:|--------:|---------:|----------:|--------------:|----------:|--------------:|----------:|-------------:|---------:|:-----------|-------------:|:---------|\n| 10 | ESPORTSTMNT01_2690210 | Blue   |        0 |       9 |       19 |        19 |             0 |         1 |             1 |         2 |            0 |        0 | team       |         1713 | LCKC     |\n| 11 | ESPORTSTMNT01_2690210 | Red    |        1 |      19 |        9 |        62 |             1 |         3 |             0 |         0 |            0 |        0 | team       |         1713 | LCKC     |\n| 22 | ESPORTSTMNT01_2690219 | Blue   |        0 |       3 |       16 |         7 |             0 |         1 |             1 |         1 |            0 |        0 | team       |         2114 | LCKC     |\n| 23 | ESPORTSTMNT01_2690219 | Red    |        1 |      16 |        3 |        39 |             1 |         4 |             0 |         1 |            1 |        2 | team       |         2114 | LCKC     |\n| 34 | 8401-8401_game_1      | Blue   |        1 |      13 |        6 |        35 |           nan |         2 |           nan |       nan |          nan |        1 | team       |         1365 | LPL      |
