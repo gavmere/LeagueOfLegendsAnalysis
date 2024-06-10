@@ -199,25 +199,44 @@ The final features we seattled on are:
 Assits, gamelength, Dragons Per second, geralds Per second, Barons Per second, K/D, Dragons, Heralds, Barons, numFirsts, result
 
 **The ones we added**
+
 We added the features Dragons Per second, heralds Per second, Barons Per second, K/D, Objectives, numFirsts, firstDragon, firstBaron, firstHerald 
+
 **Feature(s):**Dragons Per second, geralds Per second, Barons Per second
+
 **Why:** We believe these features increased our accuracy because instead of looking at the amount that a certain team took, we instead look out how often a team took said objective. This is more important because in the game you may be putting of getting an objectives to do other things. This should result in high values as high dragon/baron/herald frequency
+
 **Feature(s):**K/D
+
 **Why:**We wanted to combine the kills and deaths columns to create a kill-death ratio column because a team could have lots of kills either because they actually had a lot of kills or it was an extended game where there were a lot of kills. That is to say that more kills does not mean a team is in a better position or not. To mitigate this, we divide by the amount of deaths a team had which should result in a better indicator of a teams position.
+
 **Feature(s):**Dragons, Heralds, Barons
+
 **Why:**: Instead of our intial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it adds pretty much turns these features as more of an ordinal column rather than a discrete one.
+
 **Feature(s):**numFirsts
+
 **Why:** We created this feature by summing up each of the "first" columns row wise. This should result in a better indicator of how many "firsts" a team gotten in total while also reducing dimensionality.
 
 **The ones we changed**
+
 **Feature(s):**Dragons, Heralds, Barons
+
 **Why:**: Instead of our intial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it adds pretty much turns these features as more of an ordinal column rather than a discrete one.
+
+
 **Feature(s):**firstDragon, firstBaron, firstHerald 
+
 **Why:** Instead of keeping these binary, we decieded to turn it to a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features where instead of having a binary encoding, you encode them with the proportion they are of the data. This is to have more of a "weight" to these features. One may ask "Is it just .5 for all columns?", this is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits the proportions are around 60/40.
 
+
 ##Fairness analysis
+
 TODO
+
 ##Digging deeper
+
 At first, we were really bummed we were not able to get a high accuracy percent for our model. We thought changing models, hyperparameters and even features would help us find that perfect combination to find out what side a team was on. But if we recontextualize our model and instead look at what we could not achieve we could extract more meaning from our findings. The lack of accuracy could mean that **League of Legends is a (in terms of what side a team is on) _somewhat_ balanced** Now, I know for many League of Legends players this statement may be shocking, but the fact that we were unable to find features that significant tell us which side a team was on, including weather they won or lost, may signify that either Red or Blue have no significant advantage over the other.
+
 ##Conclusion
 
