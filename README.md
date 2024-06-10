@@ -69,7 +69,7 @@ After performing the two steps above, here's what our dataset looks like:
 To find some interesting trends/patterns, we performed a univariate analysis on our data by generating a few plots.
 
 <iframe
-  src="assets/chart-1.html"
+  src="assets/chart-2.html"
   width="800"
   height="600"
   frameborder="0"
