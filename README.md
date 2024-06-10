@@ -88,3 +88,32 @@ To find some interesting trends/patterns, we performed a univariate analysis on 
   height="600"
   frameborder="0"
 ></iframe>
+
+It looks like the distribution of kills is mostly normal, but slightly skewed to the right, meaning the data is well-behaved. The distribution seems to reflect real life, as most players hover around a similar level, whereas a select few are very good, and are thus able to get more kills than normal.
+
+<iframe
+  src="assets/chart-2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The distribution of deaths is the exact same as the distribution of kills! This is expected, as the kills committed by one team contribute to the deaths of the other team. We might be able to ignore one of these two variables, as it would be repetitive to utilize both.
+
+<iframe
+  src="assets/chart-3.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+It looks like the distribution of assists is similar to the distributions of kills and deaths; namely, it looks mostly normal, but with a slight right skew. This suggests there are a few teams with a large number of assists, while the remaining teams have a normal number of assists.
+
+<iframe
+  src="assets/chart-4.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The distribution of game length looks almost perfectly normal, which makes sense; naturally, we would expect most games to last about 30 minutes, while fewer games last fewer than 30 minutes and more than 30 minutes.
