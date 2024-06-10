@@ -80,7 +80,7 @@ After performing the two steps above, here's what our dataset looks like:
 
 ### Univariate Analysis
 
-To find some interesting trends/patterns, we performed a univariate analysis on our data by generating a few plots.
+To find some interesting trends for singular variables, we performed a univariate analysis on our data by generating a few plots.
 
 <iframe
   src="assets/chart-1.html"
@@ -117,3 +117,40 @@ It looks like the distribution of assists is similar to the distributions of kil
 ></iframe>
 
 The distribution of game length looks almost perfectly normal, which makes sense; naturally, we would expect most games to last about 30 minutes, while fewer games last fewer than 30 minutes and more than 30 minutes.
+
+### Bivariate Analysis
+
+In addition to the univariate analysis above, we performed a bivariate analysis of our data to find any notable relationships between multiple variables.
+
+Generally, people say the Blue Side wins more than the Red Side. Let's see if that's true! We can group by the "side" column, and take the mean of the "result" column to get the proportion of wins for each side.
+
+<iframe
+  src="assets/chart-5.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+It looks like people are right! According to the 2022 data, the Blue Side won more matches than the Red Side, on average.
+
+What about game length vs. kills? Naturally, we would expect the number of kills to increase as the game length increases. Let's see if that's true.
+
+<iframe
+  src="assets/chart-6.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+It looks like that isn't necessarily true! There is no clear linear relationship; instead, most of the data is concentrated in one area in a "blob" shape, and there are quite a few data points surrounding the "blob". Even some games of shorter length seem to have a lot of kills, and some games of longer length seem to have very few kills.
+
+It's said that the Blue Side tends to have a higher win rate due to easier access to Rift Herald and Baron, which make it easier to attain objectives. The Red Side typically has easier access to Dragons, but Dragons aren't as helpful when it comes to attaining objectives.
+
+<iframe
+  src="assets/chart-7.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Indeed, it looks like the above is true! Looking at the bar chart, the Blue side has a higher frequency of firstherald and firstbaron, while the Red side has a higher frequency of firstdragon.
