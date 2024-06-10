@@ -154,3 +154,70 @@ It's said that the Blue Side tends to have a higher win rate due to easier acces
 ></iframe>
 
 Indeed, it looks like the above is true! Looking at the bar chart, the Blue side has a higher frequency of firstherald and firstbaron, while the Red side has a higher frequency of firstdragon.
+
+##Baseline Model
+
+for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
+
+**To Predict:**
+We will be predicting which side a player is on, so for this we will binaraize the sides 1 being Blue and 0 being Red 
+
+**Features**
+For our baseline model features we will use the following (grouped by transformation performed)
+**Feature(s):** kills, deaths, assists, dragons, heralds, barons, and gamelength
+**Type of Variable:** Since these columns are all intgers, including gamelength, it is impossible for these features to take on decimal values and they are sortable, which makes them Discrete
+**Transformation:** We will be using the standardScaler transformer 
+**Reason:** Because we have discrete data it's always a good idea to scale it to normalize the data
+
+**Feature(s):** firstdragon, first herald, firstbaron
+Type of Variable: These columns simply tells us if a team got the first baron in their game, therefore these columns are categorical
+Transformation: For these variables we use one hot encoding
+reason: We chose to OHE instead of keeping it binary because we do not want to assume that taking these objectives first is "better".
+
+Feature(s): result
+Type of Variable: This column tells us if a team has win or lost their game
+Transformation: For these variables we Binarize it, with 1 being a win and 0 being a loss
+reason: We chose to make it a binary feature beacuse 
+DSFJHSAKFDAJKHFSDAFHSDAKFHKSDFJKASDFHKDALFLSADLJFSADJFSA FIX THIS
+
+Using these variables we use a default descion tree classifier and place it into a pipeline. We then evaulate the model using accuracy, precision, recall, and f1-score.
+
+Our results are as follows:
+Accuracy: 0.54
+Precision (blue): 0.55
+Recall (blue): 0.54
+F1-score (blue): 0.54
+
+These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better then flipping a coin on unseen data. Although it does not tell me if it underfits or overfits, we can see that there *is* something to learn about these features. The same goes for precision, recall, and f1-score. Overall, we determine the model as bad because we are just barely beating out a coin flip. 
+
+##Final Model
+For our final model we really need to look deep into our data. In pursuit of this, we not only added features, but dropped many as well.
+
+**Features Engineering:**
+The final features we seattled on are:
+
+Assits, gamelength, Dragons Per second, geralds Per second, Barons Per second, K/D, Dragons, Heralds, Barons, numFirsts, result
+
+**The ones we added**
+We added the features Dragons Per second, heralds Per second, Barons Per second, K/D, Objectives, numFirsts, firstDragon, firstBaron, firstHerald 
+**Feature(s):**Dragons Per second, geralds Per second, Barons Per second
+**Why:** We believe these features increased our accuracy because instead of looking at the amount that a certain team took, we instead look out how often a team took said objective. This is more important because in the game you may be putting of getting an objectives to do other things. This should result in high values as high dragon/baron/herald frequency
+**Feature(s):**K/D
+**Why:**We wanted to combine the kills and deaths columns to create a kill-death ratio column because a team could have lots of kills either because they actually had a lot of kills or it was an extended game where there were a lot of kills. That is to say that more kills does not mean a team is in a better position or not. To mitigate this, we divide by the amount of deaths a team had which should result in a better indicator of a teams position.
+**Feature(s):**Dragons, Heralds, Barons
+**Why:**: Instead of our intial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it adds pretty much turns these features as more of an ordinal column rather than a discrete one.
+**Feature(s):**numFirsts
+**Why:** We created this feature by summing up each of the "first" columns row wise. This should result in a better indicator of how many "firsts" a team gotten in total while also reducing dimensionality.
+
+**The ones we changed**
+**Feature(s):**Dragons, Heralds, Barons
+**Why:**: Instead of our intial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it adds pretty much turns these features as more of an ordinal column rather than a discrete one.
+**Feature(s):**firstDragon, firstBaron, firstHerald 
+**Why:** Instead of keeping these binary, we decieded to turn it to a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features where instead of having a binary encoding, you encode them with the proportion they are of the data. This is to have more of a "weight" to these features. One may ask "Is it just .5 for all columns?", this is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits the proportions are around 60/40.
+
+##Fairness analysis
+TODO
+##Digging deeper
+At first, we were really bummed we were not able to get a high accuracy percent for our model. We thought changing models, hyperparameters and even features would help us find that perfect combination to find out what side a team was on. But if we recontextualize our model and instead look at what we could not achieve we could extract more meaning from our findings. The lack of accuracy could mean that **League of Legends is a (in terms of what side a team is on) _somewhat_ balanced** Now, I know for many League of Legends players this statement may be shocking, but the fact that we were unable to find features that significant tell us which side a team was on, including weather they won or lost, may signify that either Red or Blue have no significant advantage over the other.
+##Conclusion
+
