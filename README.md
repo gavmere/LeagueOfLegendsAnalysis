@@ -155,6 +155,12 @@ It's said that the Blue Side tends to have a higher win rate due to easier acces
 
 Indeed, it looks like the above is true! Looking at the bar chart, the Blue side has a higher frequency of firstherald and firstbaron, while the Red side has a higher frequency of firstdragon.
 
+### Interesting Aggregates
+
+As mentioned above, let's look at a table comparing each side's counts for firstdragon, firstherald, and firstbaron, but with the number of wins for each team this time.
+
+| side   |   firstdragon |   firstherald |   firstbaron |\n|:-------|--------------:|--------------:|-------------:|\n| Blue   |          4305 |          6120 |         5070 |\n| Red    |          6290 |          4474 |         4970 |
+
 ##Baseline Model
 
 for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
