@@ -159,7 +159,10 @@ Indeed, it looks like the above is true! Looking at the bar chart, the Blue side
 
 As mentioned above, let's look at a table comparing each side's counts for firstdragon, firstherald, and firstbaron, but with the number of wins for each team this time.
 
-| side   |   firstdragon |   firstherald |   firstbaron |\n|:-------|--------------:|--------------:|-------------:|\n| Blue   |          4305 |          6120 |         5070 |\n| Red    |          6290 |          4474 |         4970 |
+| side   |   firstdragon |   firstherald |   firstbaron |
+|:-------|--------------:|--------------:|-------------:|
+| Blue   |          4305 |          6120 |         5070 |
+| Red    |          6290 |          4474 |         4970 |
 
 ##Baseline Model
 
