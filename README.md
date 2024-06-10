@@ -63,3 +63,14 @@ After performing the two steps above, here's what our dataset looks like:
 | 8401-8401_game_1      | Blue   |        1 |      13 |        6 |        35 |           nan |         2 |           nan |       nan |          nan |        1 | team       |         1365 | LPL      |
 
 *Note: The DataFrame above is not the full DataFrame. Only the first 5 rows are shown for reference.
+
+### Univariate Analysis
+
+To find some interesting trends/patterns, we performed a univariate analysis on our data by generating a few plots.
+
+<iframe
+  src="assets/chart-1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
