@@ -62,4 +62,4 @@ After performing the two steps above, here's what our dataset looks like:
 | ESPORTSTMNT01_2690219 | Red    |        1 |      16 |        3 |        39 |             1 |         4 |             0 |         1 |            1 |        2 | team       |         2114 | LCKC     |
 | 8401-8401_game_1      | Blue   |        1 |      13 |        6 |        35 |           nan |         2 |           nan |       nan |          nan |        1 | team       |         1365 | LPL      |
 
-* Note: The DataFrame above is not the full DataFrame. Only the first 5 rows are shown for reference.
+*Note: The DataFrame above is not the full DataFrame. Only the first 5 rows are shown for reference.
