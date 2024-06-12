@@ -186,28 +186,29 @@ reason: We chose to OHE instead of keeping it binary because we do not want to a
 Feature(s): result
 Type of Variable: This column tells us if a team has win or lost their game
 Transformation: For these variables we Binarize it, with 1 being a win and 0 being a loss
-reason: We chose to make it a binary feature beacuse 
-DSFJHSAKFDAJKHFSDAFHSDAKFHKSDFJKASDFHKDALFLSADLJFSADJFSA FIX THIS
+reason: We chose to make it a binary feature beacuse if we are guessing off a team the values of our result would be 0 or 6 and although it would be around the same as the 6 acts as a one, we decided to make it binary to make it more cohesive.
 
 Using these variables we use a default descion tree classifier and place it into a pipeline. We then evaulate the model using accuracy, precision, recall, and f1-score.
 
 Our results are as follows:
-Accuracy: 0.54
-Precision (blue): 0.55
-Recall (blue): 0.54
-F1-score (blue): 0.54
+| Metric           | Value |
+|------------------|-------|
+| Accuracy         | 0.54  |
+| Precision (blue) | 0.55  |
+| Recall (blue)    | 0.54  |
+| F1-score (blue)  | 0.54  |
 
-These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better then flipping a coin on unseen data. Although it does not tell me if it underfits or overfits, we can see that there *is* something to learn about these features. The same goes for precision, recall, and f1-score. Overall, we determine the model as bad because we are just barely beating out a coin flip. 
+These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better then flipping a coin on unseen data. Although it does not tell me if it underfits or overfits as percision and recall are pretty much the same, we can see that there *is* something to learn about these features. Overall, we determine the model is bad because we are just barely beating out a coin flip. 
 
-##Final Model
-For our final model we really need to look deep into our data. In pursuit of this, we not only added features, but dropped many as well.
+### Final Model
+For our final model we really need to look deep into our data. In pursuit of this, we not only added features, but dropped/changed many as well.
 
-**Features Engineering:**
+**Feature Engineering:**
 The final features we seattled on are:
 
 Assits, gamelength, Dragons Per second, geralds Per second, Barons Per second, K/D, Dragons, Heralds, Barons, numFirsts, result
 
-**The ones we added**
+#### **The ones we added**
 
 We added the features Dragons Per second, heralds Per second, Barons Per second, K/D, Objectives, numFirsts, firstDragon, firstBaron, firstHerald 
 
@@ -225,9 +226,9 @@ We added the features Dragons Per second, heralds Per second, Barons Per second,
 
 **Feature(s):**numFirsts
 
-**Why:** We created this feature by summing up each of the "first" columns row wise. This should result in a better indicator of how many "firsts" a team gotten in total while also reducing dimensionality.
+**Why:** We created this feature by summing up each of the "first" columns row wise. This should result in a better indicator of how many "firsts" a team gotten. We want to show that each of the "Firsts" are equally as important as the other. 
 
-**The ones we changed**
+#### **The ones we changed**
 
 **Feature(s):**Dragons, Heralds, Barons
 
@@ -238,14 +239,63 @@ We added the features Dragons Per second, heralds Per second, Barons Per second,
 
 **Why:** Instead of keeping these binary, we decieded to turn it to a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features where instead of having a binary encoding, you encode them with the proportion they are of the data. This is to have more of a "weight" to these features. One may ask "Is it just .5 for all columns?", this is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits the proportions are around 60/40.
 
+### Hyperparameter search
 
-##Fairness analysis
+To chose hyperparameters, we used _RandomizedSearchCV_ instead of gridsearching. We prefer this method because it allows us to search a range of values instead of picking specific values. Our procedure of parameters were as follows:
+
+1. Chose a hyperparameter to search.
+2. Do some research on the expect range our optimal parameter would be in we looked at several examples online of successful random forest classification on sites such as kaggle.
+3. Perform random gridsearch with a high iteration count to ensure that we are searching a wide range of different hyperparameters. (Note that RandomizedSearchCV also uses k-fold cross validation, we used a value of 5 as our dataset is relatively small, we wanted to ensure we had enough data for our model to train on)
+6. For the model we picked the "best" model based on accuracy on the validation sets
+
+The hyperparameters we picked to tune in our random forest were
+- classifier__n_estimators = range(1, 500)
+
+we chose this range because it covers having just a single descion tree as well as having a very large amount of descion trees. Having different amounts of descion trees while having more is usually good, it comes at a large cost of computation time, which would not be optimal.
+
+- max_depth = range(2, 30)
+
+We chose this range of depths because we can have our descion trees have a low depth, which might cause the model to underfit or a vary large depth, which usually means it overfits our training data. Online we saw that many descion tree models do not go over 30.
+
+- min_samples_split = range(2, 10)
+
+This parameter basically tells us the minimum samples needed to perform a split. This is another way for us to control the depth of our decision trees. Higher values means we need a minimum of 10 samples to perform a split of our data. A smaller values allows trees to capture fine details in our data at the cost of potentially over fitting. A larger value means it can capture more generalized trends at the cost of potentially under fitting. This is helpful for our data because these different values essentially acts as a grouping of our data to our class, we want to make sure we stay as general as possible.
+
+- min_samples_leaf = range(1, 20)
+
+This parameter is the number of samples needed for a node to be a leaf. This is very similar to the previous parameter and helps specifically with noise in our data, which there is alot due to some games being outliers having large kills or ending very quickly. 
+
+- criterion = either 'gini' or 'entropy'
+
+It also searches through both gini and entropy. We chose between the two because gini is default and according to our reseach this technically should result in the same results no matter what, but to make sure we threw it in to randomly search.
+
+
+This resulted in these hyper parameters
+
+| Parameter                     | Value |
+|-------------------------------|-------|
+| classifier__criterion         | gini  |
+| classifier__max_depth         | 7     |
+| classifier__min_samples_leaf  | 2     |
+| classifier__min_samples_split | 7     |
+| classifier__n_estimators      | 415   |
+
+These parameters gave us testing scores of:
+
+| Metric           | Value |
+|------------------|-------|
+| Accuracy         | 0.64  |
+| Precision (Blue) | 0.65  |
+| Recall (Blue)    | 0.61  |
+| F1-Score (Blue)  | 0.63  |
+
+These results resulted in a ~8-10% increase in all metrics, we take those! Although we do not have a perfect model, the increase in our results should that the feature engineering and hyperparameter tuning was effective. Overall, I would say that our process was successful and perhaps having a more rigours search in both features and hyperparameters could yield better results.
+
+### Fairness analysis
 
 TODO
 
-##Digging deeper
+### Digging deeper
 
 At first, we were really bummed we were not able to get a high accuracy percent for our model. We thought changing models, hyperparameters and even features would help us find that perfect combination to find out what side a team was on. But if we recontextualize our model and instead look at what we could not achieve we could extract more meaning from our findings. The lack of accuracy could mean that **League of Legends is a (in terms of what side a team is on) _somewhat_ balanced** Now, I know for many League of Legends players this statement may be shocking, but the fact that we were unable to find features that significant tell us which side a team was on, including weather they won or lost, may signify that either Red or Blue have no significant advantage over the other.
-
-##Conclusion
 
