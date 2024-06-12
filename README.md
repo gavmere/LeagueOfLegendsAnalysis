@@ -277,7 +277,7 @@ Above, we've been analyzing whether the Blue Side has an advantage over the Red 
 
 Since we are predicting which side a certain player/team is on, this is a classification problem. Specifically, this is a binary classification problem, as there are only two sides a player/team can be on: blue or red. We chose to predict "side", as, according to our exploration above, there seem to be certain trends for each side. If our machine learning model is able to capture these trends, its performance would be amazing.
 
-As far as our evaluation metric goes, we chose accuracy. We chose accuracy, as it give us a general idea of the model's ability to correctly predict the "side" column. Although it is the most basic metric, it works in this situation, as our data is balanced; there are equal number of players/teams on the Red Side and the Blue Side.
+As far as our evaluation metric goes, we chose accuracy. We chose accuracy, as it give us a general idea of the model's ability to correctly predict the "side" column. Although it is the most basic metric, it works in this situation, as our data is balanced; there are equal number of players/teams on the Red Side and the Blue Side. Although our model will be trained to maximize accuracy, we still score it on precison, recall, and F1-score aswell.
 
 Since our time of prediciton occurs at the end of a game, these are the variables we have access to:
 - result
@@ -312,7 +312,7 @@ for our base line model we decided to use the following to try to predict which 
 **To Predict:**
 We will be predicting which side a player is on, so for this we will binaraize the sides 1 being Blue and 0 being Red 
 
-**Features**
+### **Features**
 For our baseline model features we will use the following (grouped by transformation performed)
 
 **Feature(s):**
@@ -336,7 +336,7 @@ These columns simply tells us if a team got the first baron in their game, there
 **Transformation:**
 For these variables we use one hot encoding
 
-**reason:**
+**Reason:**
 We chose to OHE instead of keeping it binary because we do not want to assume that taking these objectives first is "better".
 
 
@@ -349,7 +349,7 @@ This column tells us if a team has win or lost their game
 **Transformation:**
 For these variables we Binarize it, with 1 being a win and 0 being a loss
 
-**reason:**
+**Reason:**
 We chose to make it a binary feature beacuse if we are guessing off a team the values of our result would be 0 or 6 and although it would be around the same as the 6 acts as a one, we decided to make it binary to make it more cohesive.
 
 Using these variables we use a default descion tree classifier and place it into a pipeline. We then evaulate the model using accuracy, precision, recall, and f1-score.
@@ -363,7 +363,7 @@ Our results are as follows:
 | Recall (blue)    | 0.54  |
 | F1-score (blue)  | 0.54  |
 
-These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better than flipping a coin on unseen data. Although it does not tell us if it underfits or overfits as precision and recall are pretty much the same, we can see that there *is* something to learn about these features. Overall, we determine the model is bad because we are just barely beating out a coin flip.
+These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better than flipping a coin on unseen data. Although it does not tell us if it underfits or overfits, we can see that there *is* something to learn about these features. Overall, we determine the model is bad because we are just barely beating out a coin flip.
 
 ### Final Model
 For our final model, we really need to look deep into our data. In pursuit of this, we not only added features but also dropped/changed many as well.
