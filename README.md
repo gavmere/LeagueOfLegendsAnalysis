@@ -58,7 +58,7 @@ To address our question, we narrowed down the dataset to only include these rele
 
 ### Data Cleaning
 
-The first step of our data cleaning process involved removing the irrelevant columns. Out of the 131 columns in the original dataset, we only kept 15 of the columns, which are described in more detail above.
+The first step of our data cleaning process involved removing the irrelevant columns. Out of the 131 columns in the original dataset, we only kept 14 of the columns, which are described in more detail above.
 
 Second, we decided to only keep the "team" rows of the dataset. Our question above only concerns comparisons between the two teams, so the player rows would be irrelevant.
 
