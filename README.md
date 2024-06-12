@@ -78,7 +78,9 @@ After performing the steps above, here's what our dataset looks like:
 
 ### Univariate Analysis
 
-To find some interesting trends for singular variables, we performed a univariate analysis on our data by generating a few plots.
+To find some interesting trends for singular variables, we performed a univariate analysis on our data by generating a few plots.g
+
+First, let's look at the distribution of the "kills" variable.
 
 <iframe
   src="assets/chart-1.html"
