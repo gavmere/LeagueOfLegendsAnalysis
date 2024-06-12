@@ -432,11 +432,33 @@ These parameters gave us testing scores of:
 
 These results resulted in a ~8-10% increase in all metrics, we take those! Although we do not have a perfect model, the increase in our results should that the feature engineering and hyperparameter tuning was effective. Overall, I would say that our process was successful and perhaps having a more rigours search in both features and hyperparameters could yield better results.
 
-### Fairness analysis
+## Fairness Analysis
 
-TODO
+### Fairness Analysis
 
-### Digging deeper
+Now, we want to assess whether the final model performs the same for two different groups. We can perform a fairness analysis to test this.
 
-At first, we were really bummed we were not able to get a high accuracy percent for our model. We thought changing models, hyperparameters and even features would help us find that perfect combination to find out what side a team was on. But if we recontextualize our model and instead look at what we could not achieve we could extract more meaning from our findings. The lack of accuracy could mean that **League of Legends is a (in terms of what side a team is on) _somewhat_ balanced** Now, I know for many League of Legends players this statement may be shocking, but the fact that we were unable to find features that significant tell us which side a team was on, including weather they won or lost, may signify that either Red or Blue have no significant advantage over the other.
+Specifically, we will be determining whether the model performs the same for players/teams that won a game and for players/teams that lost a game. We will be utilizing accuracy as our evaluation metric. The hypotheses for our test are:
 
+**Null Hypothesis:** Our model is fair. Its accuracy for players/teams that won is the same as the accuracy for players/teams that lost.
+
+**Alternative Hypothesis:** Our model is unfair. Its accuracy for players/teams that won is NOT the same as the accuracy for players/teams that lost.
+
+Test Statistic: Difference in Accuracy (Won - Lost)
+
+Significance Level: 0.01
+
+After performing our permutation test, we got a p-value of 0.48. An empirical distribution of our test statistics, along with the observed statistic, is shown below.
+
+<iframe
+  src="assets/chart-11.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since our p-value is greater than the significance level of 0.01, we fail to reject the null hypothesis. This suggests that the model is fair, and doesn't exhibit any bias towards certain groups.
+
+## Final Thoughts
+
+At first, we were really bummed we were not able to get a high accuracy percentage for our model. We thought changing the type of model, tuning the hyperparameters, and even engineering new features would help us find that perfect combination to determine which side a player/team was on. But, if we recontextualize our model and instead look at what we could not achieve, we can extract more meaning from our findings. The lack of accuracy could mean that League of Legends is a (in terms of what side a team is on) somewhat balanced game. Now, I know for many League of Legends players that this statement may be shocking, but the fact that we were unable to find features significant enough to tell us which side a player/team was on may signify that either Red Side or Blue Side have no significant advantage over the other side.
