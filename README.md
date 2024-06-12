@@ -277,9 +277,7 @@ Above, we've been analyzing whether the Blue Side has an advantage over the Red 
 
 Since we are predicting which side a certain player/team is on, this is a classification problem. Specifically, this is a binary classification problem, as there are only two sides a player/team can be on: blue or red. We chose to predict "side", as, according to our exploration above, there seem to be certain trends for each side. If our machine learning model is able to capture these trends, its performance would be amazing.
 
-As far as our evaluation metric goes, we chose both accuracy. We chose accuracy, as it give us a general idea of the model's ability to correctly predict the "side" column. Although it is the most basic metric, it works in this situation, as our data is balanced; there are equal number of players/teams on the Red Side and the Blue Side.
-
-We will also split our dataset into a training and a testing set to eliminate the presence of overfitting. We will use 77% of our dataset as training data, and the remaining 23% of our data as testing data.
+As far as our evaluation metric goes, we chose accuracy. We chose accuracy, as it give us a general idea of the model's ability to correctly predict the "side" column. Although it is the most basic metric, it works in this situation, as our data is balanced; there are equal number of players/teams on the Red Side and the Blue Side.
 
 Since our time of prediciton occurs at the end of a game, these are the variables we have access to:
 - result
@@ -293,6 +291,19 @@ Since our time of prediciton occurs at the end of a game, these are the variable
 - firstbaron
 - barons
 - gamelength
+
+We will split our dataset into a training and a testing set to eliminate the presence of overfitting. We will use 77% of our dataset as training data, and the remaining 23% of our data as testing data.
+
+Here's a very small subset of our training set:
+
+|       |   result |   kills |   deaths |   assists |   firstdragon |   dragons |   firstherald |   heralds |   firstbaron |   barons |   gamelength |
+|------:|---------:|--------:|---------:|----------:|--------------:|----------:|--------------:|----------:|-------------:|---------:|-------------:|
+| 18013 |        6 |      32 |        0 |        68 |             1 |         4 |             0 |         0 |            1 |        2 |         9054 |
+| 10640 |        0 |      12 |       34 |        14 |             0 |         0 |             1 |         1 |            0 |        0 |        11940 |
+| 23060 |        6 |      50 |       16 |        64 |             1 |         3 |             1 |         2 |            1 |        2 |         7788 |
+|  8841 |        0 |      18 |       36 |        52 |             1 |         3 |             1 |         2 |            0 |        0 |        14772 |
+| 18956 |        6 |      40 |       20 |        78 |             1 |         4 |             1 |         2 |            0 |        0 |        12360 |
+
 
 ##Baseline Model
 
