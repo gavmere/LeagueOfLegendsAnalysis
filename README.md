@@ -305,7 +305,7 @@ Here's a very small subset of our training set:
 |        6 |      40 |       20 |        78 |             1 |         4 |             1 |         2 |            0 |        0 |        12360 |
 
 
-##Baseline Model
+## Baseline Model
 
 for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
 
@@ -380,7 +380,7 @@ We added the features Dragons Per second, heralds Per second, Barons Per second,
 
 **Why:** Instead of keeping these binary, we decieded to turn it to a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features where instead of having a binary encoding, you encode them with the proportion they are of the data. This is to have more of a "weight" to these features. One may ask "Is it just .5 for all columns?", this is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits the proportions are around 60/40.
 
-### Hyperparameter search
+### Hyperparameter Search
 
 To chose hyperparameters, we used _RandomizedSearchCV_ instead of gridsearching. We prefer this method because it allows us to search a range of values instead of picking specific values. Our procedure of parameters were as follows:
 
@@ -389,24 +389,17 @@ To chose hyperparameters, we used _RandomizedSearchCV_ instead of gridsearching.
 3. Perform random gridsearch with a high iteration count to ensure that we are searching a wide range of different hyperparameters. (Note that RandomizedSearchCV also uses k-fold cross validation, we used a value of 5 as our dataset is relatively small, we wanted to ensure we had enough data for our model to train on)
 6. For the model we picked the "best" model based on accuracy on the validation sets
 
-The hyperparameters we picked to tune in our random forest were
-- classifier__n_estimators = range(1, 500)
+The hyperparameters we picked to tune in our random forest were:
 
-we chose this range because it covers having just a single descion tree as well as having a very large amount of descion trees. Having different amounts of descion trees while having more is usually good, it comes at a large cost of computation time, which would not be optimal.
+- classifier__n_estimators = range(1, 500): We chose this range because it covers a single descion tree, as well as a very large amount of descion trees. While having more decision trees is usually good, it comes at a large cost of computation time, which would not be optimal.
 
-- max_depth = range(2, 30)
+- max_depth = range(2, 30): We chose this range of depths because our descion trees might have a low depth, which might cause the model to underfit, or a vary large depth, which usually means the decision tree overfits our training data. When conducting research online, we saw that many descion tree models do not go over 30.
 
-We chose this range of depths because we can have our descion trees have a low depth, which might cause the model to underfit or a vary large depth, which usually means it overfits our training data. Online we saw that many descion tree models do not go over 30.
+- min_samples_split = range(2, 10): This parameter basically tells us the minimum samples needed to perform a split. This is another way for us to control the depth of our decision trees. Higher values mean we need a minimum of 10 samples to perform a split of our data. A smaller value allows trees to capture fine details in our data at the cost of potentially overfitting. A larger value means we can capture more generalized trends at the cost of potentially underfitting. This is helpful for our data because these different values essentially act as a grouping of our data to our class; we want to make sure we stay as general as possible.
 
-- min_samples_split = range(2, 10)
+- min_samples_leaf = range(1, 20): This parameter is the number of samples needed for a node to be a leaf. This is very similar to the previous parameter and helps specifically with noise in our data, which there is a lot of due to some games being outliers; for instance, these games might have a large number of kills or might end very quickly.
 
-This parameter basically tells us the minimum samples needed to perform a split. This is another way for us to control the depth of our decision trees. Higher values means we need a minimum of 10 samples to perform a split of our data. A smaller values allows trees to capture fine details in our data at the cost of potentially over fitting. A larger value means it can capture more generalized trends at the cost of potentially under fitting. This is helpful for our data because these different values essentially acts as a grouping of our data to our class, we want to make sure we stay as general as possible.
-
-- min_samples_leaf = range(1, 20)
-
-This parameter is the number of samples needed for a node to be a leaf. This is very similar to the previous parameter and helps specifically with noise in our data, which there is alot due to some games being outliers having large kills or ending very quickly. 
-
-- criterion = either 'gini' or 'entropy'
+- criterion = ‘gini’ or ‘entropy’: This method searches through both "gini" and "entropy". We chose between the two because "gini" is the default and, according to our reseach, "entropy" should pretty much the same results, but we passed it in to capture any possible incremental differences.
 
 It also searches through both gini and entropy. We chose between the two because gini is default and according to our reseach this technically should result in the same results no matter what, but to make sure we threw it in to randomly search.
 
