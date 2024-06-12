@@ -269,6 +269,30 @@ After performing our permutation test, we got a p-value of 0.0. An empirical dis
 
 Since our p-value is less than the significance level of 0.01, we reject the null hypothesis. This suggests that The Blue side gets more kills, on average, than the Red side, which backs up the theory we've been analyzing.
 
+## Framing a Prediction Problem
+
+### Problem Identification
+
+Above, we've been analyzing whether the Blue Side has an advantage over the Red Side, and whether this advantage leads to a higher probability of winning for the Blue Side. These "advantages" come in the form of certain features, like the ability for the Blue Side to get the "firstherald" and "firstdragon" more often than the Red Side. Will these features, in addition to other features like the number of kills or the match's length allow us to predict which side a player/team was on? This is the basis of our model below.
+
+Since we are predicting which side a certain player/team is on, this is a classification problem. Specifically, this is a binary classification problem, as there are only two sides a player/team can be on: blue or red. We chose to predict "side", as, according to our exploration above, there seem to be certain trends for each side. If our machine learning model is able to capture these trends, its performance would be amazing.
+
+As far as our evaluation metric goes, we chose both accuracy. We chose accuracy, as it give us a general idea of the model's ability to correctly predict the "side" column. Although it is the most basic metric, it works in this situation, as our data is balanced; there are equal number of players/teams on the Red Side and the Blue Side.
+
+We will also split our dataset into a training and a testing set to eliminate the presence of overfitting. We will use 77% of our dataset as training data, and the remaining 23% of our data as testing data.
+
+Since our time of prediciton occurs at the end of a game, these are the variables we have access to:
+- result
+- kills
+- deaths
+- assists
+- firstdragon
+- dragons
+- firstherald
+- heralds
+- firstbaron
+- barons
+- gamelength
 
 ##Baseline Model
 
