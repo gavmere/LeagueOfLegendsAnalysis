@@ -53,8 +53,6 @@ To address our question, we narrowed down the dataset to only include these rele
 - position: This string column represents the position of the particular player the row corresponds to. The possible positions include "top", "jungle", "mid", "bot", and "support". If the row corresponds to a team, the position column simply contains the word "Team".
   
 - gamelength: This integer column represents the length of the match, in seconds.
-  
-- league: This string column represents the specific league tournament in which the corresponding match took place.
 
 ## Data Cleaning and Exploratory Data Analysis
 
