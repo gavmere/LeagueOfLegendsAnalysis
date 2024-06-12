@@ -172,6 +172,22 @@ As mentioned above, let's look at a table comparing each side's counts for first
 | Blue   |          4305 |          6120 |         5070 |
 | Red    |          6290 |          4474 |         4970 |
 
+| side   |   result |
+|:-------|---------:|
+| Blue   |     6509 |
+| Red    |     5905 |
+
+The above aggregated tables reinforce the conclusion we arrived at with the charts above; the Blue Side has more wins due to better access to firstherald and firstbaron, while the Red Side has less wins, but better acccess to firstdragon.
+
+We can also find any patterns associated with the result of a match and the average number of kills, deaths, assists, etc.
+
+| Win?   |    kills |   deaths |   assists |   gamelength |
+|:-------|---------:|---------:|----------:|-------------:|
+| False  |  9.36785 | 19.6123  |   20.0719 |      1895.94 |
+| True   | 19.5965  |  9.40672 |   44.5698 |      1896.17 |
+
+It looks like teams that won have a higher number of kills and a lower number of deaths, on average, than teams that lost. Also, the teams that won have more than twice as many assists, on average, than teams that lost. The game lengths, though, are about the same, on average, regardless of the result.
+
 ##Baseline Model
 
 for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
