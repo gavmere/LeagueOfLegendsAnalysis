@@ -240,6 +240,36 @@ After performing our permutation test, we got a p-value of 0.023. An empirical d
 
 Since our p-value is greater than the significance level of 0.01, we fail to reject the null hypothesis. This suggests that the distribution of "assists" when "firstherald" is missing is the same as the distribution of "assists" when "firstherald" is not missing, meaning the missingness of "firstherald" does not depend on "assists".
 
+## Hypothesis Testing
+
+### Hypothesis Testing
+
+For our hypothesis test, we assessed whether the Blue Side gets more kills, on average, than the Red Side. Like we mentioned above, knowing this information would be extremely crucial in determining whether the Blue Side actually has an advantage over the Red Side.
+
+**Null Hypothesis:** The Blue Side gets the same number of kills, on average, as the Red Side.
+
+**Alternative Hypothesis:** The Blue side gets more kills, on average, than the Red side.
+
+Test Statistic: Difference in Group Means of Number of Kills (Blue - Red)
+
+We decided to choose the difference in group means as our test statistic, as it provides us with a good idea as to how different the number of kills between each side is. A positive difference would mean the Blue Side gets more kills than the Red Side, while a negative difference would mean the Red Side gets more kills than the Blue Side.
+
+Significance Level: 0.01
+
+We wanted to make the conclusion we arrived at was backed by solid evidence, so we chose a fairly small significance level.
+
+After performing our permutation test, we got a p-value of 0.0. An empirical distribution of our test statistics, along with the observed statistic, is shown below.
+
+<iframe
+  src="assets/chart-10.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since our p-value is less than the significance level of 0.01, we reject the null hypothesis. This suggests that The Blue side gets more kills, on average, than the Red side, which backs up the theory we've been analyzing.
+
+
 ##Baseline Model
 
 for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
