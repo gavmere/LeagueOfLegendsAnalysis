@@ -188,6 +188,58 @@ We can also find any patterns associated with the result of a match and the aver
 
 It looks like teams that won have a higher number of kills and a lower number of deaths, on average, than teams that lost. Also, the teams that won have more than twice as many assists, on average, than teams that lost. The game lengths, though, are about the same, on average, regardless of the result.
 
+## Assessment of Missingness
+
+### NMAR Analysis
+
+Looking at all the columns in the dataset, it looks like the columns "ban1", "ban2", "ban3", "ban4", and "ban5" are NMAR, or not missing at random. In these columns, the fields are only populated if an indiviudal player decides to ban someone, and are NaN otherwise. Thus, the missingness of these values depends on the actual missing values themselves, making the column NMAR. However, we can't conclude this by simply looking at the columns. A more thorough inspection is necessary. It also looks like these 5 columns would be considered MAR, or missing at random, if the "all_banned" column was included, as the missing values in "ban1", "ban2", "ban3", "ban4", and "ban5" would depend on "all_banned". The "all_banned" column contains values of 0 and 1; 1 if all players banned an enemy champion, and 0 if at least one player didn't ban an enemy champion. Again, we can't conclude this by simply looking at the columns, and a more thorough inspection is needed.
+
+### Missingness Dependency
+
+To test for missingness dependency in our dataset, we picked the "firstherald" column to analyze further. We checked whether "firstherald" depended on "kills" and "assists". The details of our two permutation tests are below.
+
+**Test 1:** Does the missingness of "firstherald" depend on "kills"?
+
+**Null Hypothesis:** The distribution of "kills" when "firstherald" is missing is the same as the distribution of "kills" when "firstherald" is not missing.
+
+**Alternative Hypothesis:** The distribution of "kills" when "firstherald" is missing is NOT the same as the distribution of "kills" when "firstherald" is not missing.
+
+Test Statistic: Absolute Difference in Group Means
+
+Significance Level: 0.01
+
+After performing our permutation test, we got a p-value of 0.0. An empirical distribution of our test statistics, along with the observed statistic, is shown below.
+
+<iframe
+  src="assets/chart-8.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since our p-value is less than the significance level of 0.01, we reject the null hypothesis. This suggests that the distribution of "kills" when "firstherald" is missing is NOT the same as the distribution of "kills" when "firstherald" is not missing, meaning the missingness of "firstherald" depends on "kills".
+
+**Test 2:** Does the missingness of "firstherald" depend on "assists"?
+
+**Null Hypothesis:** The distribution of "assists" when "firstherald" is missing is the same as the distribution of "assists" when "firstherald" is not missing.
+
+**Alternative Hypothesis:** The distribution of "assists" when "firstherald" is missing is NOT the same as the distribution of "assists" when "firstherald" is not missing.
+
+Test Statistic: Absolute Difference in Group Means
+
+Significance Level: 0.01
+
+After performing our permutation test, we got a p-value of 0.023. An empirical distribution of our test statistics, along with the observed statistic, is shown below.
+
+<iframe
+  src="assets/chart-9.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since our p-value is greater than the significance level of 0.01, we fail to reject the null hypothesis. This suggests that the distribution of "assists" when "firstherald" is missing is the same as the distribution of "assists" when "firstherald" is not missing, meaning the missingness of "firstherald" does not depend on "assists".
+
 ##Baseline Model
 
 for our base line we decide to use the following colums we will try to predict which side a team was on based on the chosen features
