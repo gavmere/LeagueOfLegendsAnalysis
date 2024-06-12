@@ -62,7 +62,7 @@ The first step of our data cleaning process involved removing the irrelevant col
 
 Second, we decided to only keep the "team" rows of the dataset. Our question above only concerns comparisons between the two teams, so the player rows would be irrelevant.
 
-Finally, the columns "result", "firstdragon", "firstherald", and "firstbaron" should be of type Boolean, not int or float. These columns were therefore converted appropriately.
+Finally, the columns "result", "firstdragon", "firstherald", and "firstbaron" should be of type Boolean, not int or float. These columns were therefore converted appropriately. It's important to note that although these columns were converted to Boolean, any missing values were preserved for the section to follow.
 
 After performing the two steps above, here's what our dataset looks like:
 
