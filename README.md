@@ -152,7 +152,7 @@ What about game length vs. kills? Naturally, we would expect the number of kills
 
 It looks like that isn't necessarily true! There is no clear linear relationship; instead, most of the data is concentrated in one area in a "blob" shape, and there are quite a few data points surrounding the "blob". Even some games of shorter length seem to have a lot of kills, and some games of longer length seem to have very few kills.
 
-It's said that the Blue Side tends to have a higher win rate due to easier access to Rift Herald and Baron, which make it easier to attain objectives. The Red Side typically has easier access to Dragons, but Dragons aren't as helpful when it comes to attaining objectives.
+It's said that the Blue Side tends to have a higher win rate due to easier access to Rift Herald and Rift Baron, which make it easier to attain objectives. The Red Side typically has easier access to Dragons, but Dragons aren't as helpful when it comes to attaining objectives.
 
 <iframe
   src="assets/chart-7.html"
