@@ -58,11 +58,11 @@ To address our question, we narrowed down the dataset to only include these rele
 
 ### Data Cleaning
 
-The first step of our data cleaning process involved removing the irrelevant columns. Out of the 131 columns in the original dataset, we only kept 14 of the columns, which are described in more detail above.
+The first step of our data cleaning process involved removing the irrelevant columns. Out of the 131 columns in the original dataset, we only kept 14 of the columns, which are described in more detail above. These 14 columns are all of the columns that were essential for our analysis; including additional columns would've led to unnecessary clutter and space.
 
-Second, we decided to only keep the "team" rows of the dataset. Our question above only concerns comparisons between the two teams, so the player rows would be irrelevant.
+Second, we decided to only keep the "team" rows of the dataset. Our question above only concerns comparisons between the two teams, so the player rows would be irrelevant. Keeping only the team rows also kept our visualizations simple, understandable, and uncluttered.
 
-Finally, the columns "result", "firstdragon", "firstherald", and "firstbaron" should be of type Boolean, not int or float. These columns were therefore converted appropriately. It's important to note that although these columns were converted to Boolean, any missing values were preserved for the section to follow.
+Finally, the columns "result", "firstdragon", "firstherald", and "firstbaron" should've been of type Boolean, not int or float. These columns were therefore converted appropriately. It's important to note that although these columns were converted to Boolean, any missing values were preserved for the section to follow.
 
 After performing the steps above, here's what our dataset looks like:
 
