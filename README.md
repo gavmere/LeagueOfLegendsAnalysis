@@ -442,7 +442,7 @@ The hyperparameters we picked to tune in our random forest were:
 
 - criterion = 'gini' or 'entropy': This method searches through both "gini" and "entropy". We chose between the two because "gini" is the default and, according to our research, "entropy" should pretty much give the same results, but we passed it in to capture any possible incremental differences.
 
-This resulted in these hyperparameters:
+This resulted in these optimal hyperparameters:
 
 | Parameter                     | Value |
 |-------------------------------|-------|
