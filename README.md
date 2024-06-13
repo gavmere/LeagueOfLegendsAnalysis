@@ -307,66 +307,56 @@ Here's a very small subset of our training set:
 
 ## Baseline Model
 
-for our base line model we decided to use the following to try to predict which side a team was on.
+For our baseline model, we normalize the "kills", "deaths", "assists", "dragons", "heralds", "barons", and "gamelength" columns by using StandardScaler(), one hot encode the "firstdragon", "firstherald", and "firstbaron" columns by using OneHotEncoder(), and binarize the "result" column using Binarizer(). We will use a default decision tree classifier.
 
-**To Predict:**
-We will be predicting which side a player is on, so for this we will binaraize the sides 1 being Blue and 0 being Red 
+**To Predict:** We will be predicting which side a player is on, so for this we will binaraize the "side" column: 1 being Blue and 0 being Red. 
 
-### **Features**
-For our baseline model features we will use the following (grouped by transformation performed)
+### Features
 
-**Feature(s):**
-kills, deaths, assists, dragons, heralds, barons, and gamelength
+For our baseline model's features, we will use the following, grouped by the transformations performed.
 
-**Type of Variable:**
-Since these columns are all intgers, including gamelength, it is impossible for these features to take on decimal values and they are sortable, which makes them Discrete
+**Feature(s):** kills, deaths, assists, dragons, heralds, barons, and gamelength
 
-**Transformation:**
-We will be using the standardScaler transformer 
+**Type of Variable:** It is impossible for these features to take on decimal values, and these variables are sortable, which makes them discrete quantitative variables.
 
-**Reason:**
-Because we have discrete data it's always a good idea to scale it to normalize the data
+**Transformation:** We use the StandardScaler() transformer.
 
-**Feature(s):**
-firstdragon, first herald, firstbaron
+**Reason:** Because we have discrete data, it's always a good idea to scale it to normalize the data.
 
-**Type of Variable:**
-These columns simply tells us if a team got the first baron in their game, therefore these columns are categorical
+**Feature(s):** firstdragon, first herald, firstbaron
 
-**Transformation:**
-For these variables we use one hot encoding
+**Type of Variable:** These columns simply tell us if a team got the first dragon in the game, the first herald in the game, or the first baron in the game; therefore, these columns are nominal categorical variables.
 
-**Reason:**
-We chose to OHE instead of keeping it binary because we do not want to assume that taking these objectives first is "better".
+**Transformation:** For these variables, we use one hot encoding.
 
+**Reason:** We chose to one hot encode instead of keeping the variables binary because we do not want to assume that taking these objectives first is "better".
 
-**Feature(s):**
-result
+**Feature(s):** result
 
-**Type of Variable:**
-This column tells us if a team has win or lost their game
+**Type of Variable:** This column tells us if a team has won or lost the respective game.
 
-**Transformation:**
-For these variables we Binarize it, with 1 being a win and 0 being a loss
+**Transformation:** For this variable, we binarize it using Binarizer(), with 1 being a win and 0 being a loss.
 
-**Reason:**
-We chose to make it a binary feature beacuse if we are guessing off a team the values of our result would be 0 or 6 and although it would be around the same as the 6 acts as a one, we decided to make it binary to make it more cohesive.
+**Reason:** The values of the "result" column are 0 for a loss or 6 for a win since we're accounting for players and teams; the 6 essentially acts as a 1, but in this case, we decided to make it binary (convert the 6 toa  1) to make it more cohesive.
 
-Using these variables we use a default descion tree classifier and place it into a pipeline. We then evaulate the model using accuracy, precision, recall, and f1-score.
+### Results
 
-Our results are as follows:
+We then utilized a decision tree classifier, and placed everything into a pipeline. We then evaulated the model using accuracy, precision, recall, and F1-score, but of course, we focused on accuracy, as that's the main evaluation metric we chose.
+
+Our results were as follows:
 
 | Metric           | Value |
 |------------------|-------|
 | Accuracy         | 0.54  |
-| Precision (blue) | 0.55  |
-| Recall (blue)    | 0.54  |
-| F1-score (blue)  | 0.54  |
+| Precision (Blue) | 0.55  |
+| Recall (Blue)    | 0.54  |
+| F1-Score (Blue)  | 0.55  |
 
-These scores look pretty bad. The accuracy of .54 signifies to me that the model is slightly better than flipping a coin on unseen data. Although it does not tell us if it underfits or overfits, we can see that there *is* something to learn about these features. Overall, we determine the model is bad because we are just barely beating out a coin flip.
+These scores look pretty bad. The accuracy of 0.54 signifies to us that the model is slightly better than flipping a coin on unseen data. Although it does not tell us if it underfits or overfits, we can see that there *is* something to learn about these features. Overall, we concluded that the model was bad because it just barely beats out a coin flip.
 
-### Final Model
-For our final model, we really need to look deep into our data. In pursuit of this, we not only added features but also dropped/changed many as well.
+## Final Model
+
+For our final model, we developed many new features (and modified some) in hopes of finding meaningful relationships; we did this in hopes of improving our model's performance.
 
 #### **Feature Engineering:**
 
