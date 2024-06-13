@@ -325,6 +325,8 @@ For our baseline model's features, we will use the following, grouped by the tra
 
 **Reason:** Because we have discrete data, it's always a good idea to scale it to normalize the data.
 
+---
+
 **Feature(s):** firstdragon, first herald, firstbaron
 
 **Type of Variable:** These columns simply tell us if a team got the first dragon in the game, the first herald in the game, or the first baron in the game; therefore, these columns are nominal categorical variables.
@@ -333,6 +335,8 @@ For our baseline model's features, we will use the following, grouped by the tra
 
 **Reason:** We chose to one hot encode instead of keeping the variables binary because we do not want to assume that taking these objectives first is "better".
 
+---
+
 **Feature(s):** result
 
 **Type of Variable:** This column tells us if a team has won or lost the respective game.
@@ -340,6 +344,8 @@ For our baseline model's features, we will use the following, grouped by the tra
 **Transformation:** For this variable, we binarize it using Binarizer(), with 1 being a win and 0 being a loss.
 
 **Reason:** The values of the "result" column are 0 for a loss or 6 for a win since we're accounting for players and teams; the 6 essentially acts as a 1, but in this case, we decided to make it binary (convert the 6 toa  1) to make it more cohesive.
+
+---
 
 ### Results
 
@@ -358,51 +364,64 @@ These scores look pretty bad. The accuracy of 0.54 signifies to us that the mode
 
 ## Final Model
 
+### Feature Engineering
+
 For our final model, we developed many new features (and modified some) in hopes of finding meaningful relationships; we did this in hopes of improving our model's performance.
 
-#### **Feature Engineering:**
+The plethora of **new** features we create include:
+- gamelength_mins: We transform gamelength into minutes from seconds.
+- Dragons Per Second: This new feature captures the number of dragons each player/team obtained per second in the game.
+- Heralds Per Second: This new feature captures the number of heralds each player/team obtained per second in the game.
+- Barons Per Second: This new feature captures the number of barons each player/team obtained per second in the game.
+- K/D: This metric represents the kill-death ratio for the player/team.
+- Objectives Per Second: This new feature captures the number of objectives each player/team obtained per second in the game.
+- Objectives: This feature represents the total number of objectives each player/team attained during the match.
+- numFirsts: This feature represents the total number of objectives the player/team got first.
+- freqEncodedDragon: This new feature represents the proportion of 0s and 1s for "firstdragon", instead of simply 0s and 1s.
+- freqEncodedBaron: This new feature represents the proportion of 0s and 1s for "firstbaron", instead of simply 0s and 1s.
+- freqEncodedHerald: This new feature represents the proportion of 0s and 1s for "firstherald", instead of simply 0s and 1s.
 
-The final features we settled on are:
+We tested many combinations of the features above, but in the end, we stuck with the following for our final model: assists, gamelength, Dragons Per Second, Heralds Per Second, Barons Per Second, K/D, dragons, heralds, barons, numFirsts, and result.
 
-Assists, Gamelength, Dragons Per second, Heralds Per second, Barons Per second, K/D, Dragons, Heralds, Barons, NumFirsts, Result
+For our final model's features, we used the following, grouped by the category of feature.
 
-#### **The ones we added**
+---
 
-We added the features Dragons Per second, Heralds Per second, Barons Per second, K/D, NumFirsts, firstDragon, firstBaron, firstHerald.
+**Feature(s):** Dragons Per Second, Heralds Per Second, Barons Per Second
 
-**Feature(s):** Dragons Per second, Heralds Per second, Barons Per second
+**Why:** We believe these three features increased our accuracy because instead of looking at the amount of objectives that a certain team took, we instead look at how often a team took said objectives. This is more important because in the game you may be putting off getting an objective to do other things. This should result in more meaningful features than simply dragons, heralds, and barons.
 
-**Why:** We believe these features increased our accuracy because instead of looking at the amount that a certain team took, we instead look at how often a team took said objective. This is more important because in the game you may be putting off getting an objective to do other things. This should result in high values as high dragon/baron/herald frequency.
+---
 
 **Feature(s):** K/D
 
-**Why:** We wanted to combine the kills and deaths columns to create a kill-death ratio column because a team could have lots of kills either because they actually had a lot of kills or it was an extended game where there were a lot of kills. That is to say that more kills do not mean a team is in a better position or not. To mitigate this, we divide by the number of deaths a team had which should result in a better indicator of a team's position.
+**Why:** We wanted to combine the kills and deaths columns to create a kill-death ratio column because a team could have lots of kills, either because they actually had a lot of kills or because they were playing in an extended game where there were a lot of kills. Simply put, more kills do not mean a team is in a better position or not. To mitigate this, we divide by the number of deaths a team had, which should result in a better indicator of a team's position.
 
-**Feature(s):** Dragons, Heralds, Barons
+---
 
-**Why:** Instead of our initial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it pretty much turns these features into more of an ordinal column rather than a discrete one.
+**Feature(s):** dragons, heralds, barons
+
+**Why:** Instead of our initial idea of standard scaling these columns, we instead keep these columns as-is. We believe this improved our accuracy because it pretty much turns these features into more of an ordinal column rather than a discrete column.
+
+---
 
 **Feature(s):** numFirsts
 
-**Why:** We created this feature by summing up each of the "first" columns row-wise. This should result in a better indicator of how many "firsts" a team has gotten. We want to show that each of the "Firsts" is equally as important as the other.
+**Why:** We created this feature by summing up each of the "first" columns row-wise. This resulted in a better indicator of how many "firsts" a team got. We wanted to show that each of the "firsts" is equally as important as the other.
 
-#### **The ones we changed**
+---
 
-**Feature(s):** Dragons, Heralds, Barons
+**Feature(s):** firstdragon, firstbaron, firstherald
 
-**Why:** Instead of our initial idea of standard scaling these columns, we instead keep these columns as is. We believe this improved our accuracy because it pretty much turns these features into more of an ordinal column rather than a discrete one.
-
-**Feature(s):** firstDragon, firstBaron, firstHerald
-
-**Why:** Instead of keeping these binary, we decided to turn it into a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features where instead of having a binary encoding, you encode them with the proportion they are of the data. This is to have more of a "weight" to these features. One may ask "Is it just .5 for all columns?", this is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits the proportions are around 60/40.
+**Why:** Instead of keeping these binary, we decided to turn them into a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features, where instead of having a binary encoding, you encode the features with the proportion they encompass of the entire column. This is to have more of a "weight" to these features. One may ask: "Is it just .5 for all columns?" This is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits, the proportions are around 60/40.
 
 ### Hyperparameter Search
 
-To choose hyperparameters, we used _RandomizedSearchCV_ instead of grid searching. We prefer this method because it allows us to search a range of values instead of picking specific values. Our procedure for parameters was as follows:
+To choose hyperparameters, we used _RandomizedSearchCV_ instead of _GridSearchCV_. We preferred this method because it allowed us to search a range of values instead of picking specific values. Our procedure for parameters was as follows:
 
 1. Choose a hyperparameter to search.
 2. Do some research on the expected range our optimal parameter would be in. We looked at several examples online of successful random forest classification on sites such as Kaggle.
-3. Perform random grid search with a high iteration count to ensure that we are searching a wide range of different hyperparameters. (Note that RandomizedSearchCV also uses k-fold cross-validation, we used a value of 5 as our dataset is relatively small, we wanted to ensure we had enough data for our model to train on)
+3. Perform random grid search with a high iteration count to ensure that we are searching a wide range of different hyperparameters. (Note that RandomizedSearchCV also uses k-fold cross-validation; we used a value of 5, as our dataset is relatively small, and we wanted to ensure we had enough data for our model to train on.)
 4. For the model, we picked the "best" model based on accuracy on the validation sets.
 
 The hyperparameters we picked to tune in our random forest were:
@@ -417,28 +436,26 @@ The hyperparameters we picked to tune in our random forest were:
 
 - criterion = 'gini' or 'entropy': This method searches through both "gini" and "entropy". We chose between the two because "gini" is the default and, according to our research, "entropy" should pretty much give the same results, but we passed it in to capture any possible incremental differences.
 
-It also searches through both gini and entropy. We chose between the two because gini is default and according to our research, this technically should result in the same results no matter what, but to make sure we threw it in to randomly search.
-
 This resulted in these hyperparameters:
 
 | Parameter                     | Value |
 |-------------------------------|-------|
 | classifier__criterion         | gini  |
-| classifier__max_depth         | 7     |
-| classifier__min_samples_leaf  | 2     |
-| classifier__min_samples_split | 7     |
-| classifier__n_estimators      | 415   |
+| classifier__max_depth         | 5     |
+| classifier__min_samples_leaf  | 4     |
+| classifier__min_samples_split | 8     |
+| classifier__n_estimators      | 430   |
 
 These parameters gave us testing scores of:
 
 | Metric           | Value |
 |------------------|-------|
-| Accuracy         | 0.64  |
-| Precision (Blue) | 0.65  |
-| Recall (Blue)    | 0.61  |
-| F1-Score (Blue)  | 0.63  |
+| Accuracy         | 0.62  |
+| Precision (Blue) | 0.64  |
+| Recall (Blue)    | 0.59  |
+| F1-Score (Blue)  | 0.61  |
 
-These results resulted in a ~8-10% increase in all metrics, we take those! Although we do not have a perfect model, the increase in our results should that the feature engineering and hyperparameter tuning was effective. Overall, I would say that our process was successful and perhaps having a more rigours search in both features and hyperparameters could yield better results.
+These results resulted in an approximate 5% - 10% increase in all metrics; we'll take it! Although we do not have a perfect model, the increase in our results showed that the feature engineering and hyperparameter tuning was effective. Overall, we would say that our process was successful and perhaps having a more rigorous search in both features and hyperparameters could have yielded better results.
 
 ## Fairness Analysis
 
