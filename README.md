@@ -381,8 +381,6 @@ The plethora of **new** features we create include:
 - freqEncodedBaron: This new feature represents the proportion of 0s and 1s for "firstbaron", instead of simply 0s and 1s.
 - freqEncodedHerald: This new feature represents the proportion of 0s and 1s for "firstherald", instead of simply 0s and 1s.
 
-We tested many combinations of the features above, but in the end, we stuck with the following for our final model: assists, gamelength, Dragons Per Second, Heralds Per Second, Barons Per Second, K/D, dragons, heralds, barons, numFirsts, and result.
-
 For our final model's features, we used the following, grouped by the category of feature.
 
 ---
