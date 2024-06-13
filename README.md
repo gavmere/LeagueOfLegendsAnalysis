@@ -315,6 +315,8 @@ For our baseline model, we normalize the "kills", "deaths", "assists", "dragons"
 
 For our baseline model's features, we will use the following, grouped by the transformations performed.
 
+---
+
 **Feature(s):** kills, deaths, assists, dragons, heralds, barons, and gamelength
 
 **Type of Variable:** It is impossible for these features to take on decimal values, and these variables are sortable, which makes them discrete quantitative variables.
