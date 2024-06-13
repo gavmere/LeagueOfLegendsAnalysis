@@ -415,6 +415,14 @@ For our final model's features, we used the following, grouped by the category o
 
 **Why:** Instead of keeping these binary, we decided to turn them into a different encoding called "Frequency Encoding". Frequency encoding is a way to encode categorical features, where instead of having a binary encoding, you encode the features with the proportion they encompass of the entire column. This is to have more of a "weight" to these features. One may ask: "Is it just .5 for all columns?" This is only true if there was a dragon/baron/herald in every game, which is not always the case. In fact, for almost all of our splits, the proportions are around 60/40.
 
+### Modeling Algorithm/Process
+
+We started off by using another decision tree classifier, but with the newly-engineered features described above. This resulted in evaluation metrics that were about the same as our baseline model's.
+
+So, we decided to use a different type of classifier to try to get better results. We used a RandromForestClassifier model. After running this model, our results were definitely better than our previous models, but we wanted to see if we could improve upon the model even more.
+
+So, we decided to use a RandomForestClassifier() again, but this time with a RanomizedSearchCV to find optimal parameters. This process is described in the following section.
+
 ### Hyperparameter Search
 
 To choose hyperparameters, we used _RandomizedSearchCV_ instead of _GridSearchCV_. We preferred this method because it allowed us to search a range of values instead of picking specific values. Our procedure for parameters was as follows:
@@ -445,6 +453,8 @@ This resulted in these hyperparameters:
 | classifier__min_samples_leaf  | 4     |
 | classifier__min_samples_split | 8     |
 | classifier__n_estimators      | 430   |
+
+### Results
 
 These parameters gave us testing scores of:
 
